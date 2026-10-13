@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Presskit 3D, plan de trabajo y receta de canción del dúo urbano Lion y Emir.">
+<style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Lion y Emir</title>
+<style>
+:root {
+  /* Concepto: cuaderno de estudio nocturno. Fondo negro violáceo, plata (Lion) y oro (Emir) como dos voces que se alternan. */
+  --bg: #f1f1f4;
+  --surface: #ffffff;
+  --fg: #16161d;
+  --muted: #5d5d6b;
+  --line: #d6d6de;
+  --silver: #6f7785;
+  --gold: #a87a14;
+  --silver-soft: #e4e7ec;
+  --gold-soft: #f4ebd2;
+  --display: "Unbounded", "Arial Black", sans-serif;
+  --body: "DM Sans", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b0b10; --surface: #14141c; --fg: #ececf1; --muted: #9a9aab; --line: #272733;
+    --silver: #c4cad4; --gold: #e0b252; --silver-soft: #1d2028; --gold-soft: #2a2314; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b0b10; --surface: #14141c; --fg: #ececf1; --muted: #9a9aab; --line: #272733;
+  --silver: #c4cad4; --gold: #e0b252; --silver-soft: #1d2028; --gold-soft: #2a2314; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.6; padding-inline: 16px; padding-block: 0 64px; }
+.wrap { max-width: 980px; margin-inline: auto; }
+header.top { padding-block: 40px 24px; }
+.kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 8vw, 4.4rem); line-height: 1; margin: 0; text-wrap: balance; }
+h1 .l { color: var(--silver); } h1 .e { color: var(--gold); } h1 .y { color: var(--muted); font-weight: 300; }
+.sub { color: var(--muted); max-width: 60ch; margin: 16px 0 0; }
+nav.tabs { display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-block: 8px 0; position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 5; }
+nav.tabs button { font: inherit; font-weight: 600; background: none; color: var(--muted); border: 0; border-bottom: 3px solid transparent; padding: 12px 16px; cursor: pointer; }
+nav.tabs button[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--gold); }
+nav.tabs button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+section.panel { padding-block: 32px 0; }
+h2 { font-family: var(--display); font-size: clamp(1.3rem, 4vw, 1.8rem); margin: 48px 0 16px; text-wrap: balance; }
+h2:first-child { margin-top: 0; }
+h3 { font-size: 1.05rem; margin: 0 0 4px; }
+p { margin: 0 0 12px; max-width: 70ch; }
+.note { font-size: .9rem; color: var(--muted); border-left: 3px solid var(--gold); padding: 4px 0 4px 12px; margin: 16px 0; max-width: 70ch; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px; min-width: 0; }
+.card.lion { border-top: 4px solid var(--silver); } .card.emir { border-top: 4px solid var(--gold); }
+.card ul { margin: 8px 0 0; padding-left: 18px; } .card li { margin-bottom: 4px; }
+.tag { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.lion .tag { color: var(--silver); } .emir .tag { color: var(--gold); }
+.phase { display: grid; grid-template-columns: 110px 1fr; gap: 8px 24px; padding-block: 24px; border-top: 1px solid var(--line); }
+.phase .when { font-family: var(--mono); font-size: 13px; color: var(--gold); }
+.phase .when b { display: block; color: var(--fg); font-family: var(--display); font-size: 1rem; }
+.phase ul { margin: 8px 0; padding-left: 18px; } .phase li { margin-bottom: 4px; }
+.done { font-size: .9rem; color: var(--muted); } .done strong { color: var(--fg); }
+@media (max-width: 560px) { .phase { grid-template-columns: 1fr; } }
+.bars { display: flex; flex-wrap: wrap; gap: 4px; margin: 16px 0; }
+.bar { font-family: var(--mono); font-size: 12px; padding: 10px 6px; background: var(--surface); border: 1px solid var(--line); border-bottom-width: 4px; text-align: center; min-width: 0; }
+.bar b { display: block; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.bar.s { border-bottom-color: var(--silver); } .bar.g { border-bottom-color: var(--gold); } .bar.n { border-bottom-color: var(--muted); }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: .95rem; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.todo { background: var(--gold-soft); color: var(--fg); padding: 1px 6px; border-radius: 3px; font-size: .9em; }
+.swatches { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+.sw { width: 96px; } .sw i { display: block; height: 56px; border-radius: 4px; border: 1px solid var(--line); margin-bottom: 4px; }
+.sw span { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.themes { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { border: 1px solid var(--line); border-radius: 999px; padding: 4px 14px; font-size: .9rem; background: var(--surface); }
+dl { margin: 0; } dt { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 12px; } dd { margin: 2px 0 0; }
+a { color: var(--gold); }
+body { overflow-x: clip; }
+.scrolly { position: relative; height: 560vh; width: 100vw; margin-left: calc(50% - 50vw); background: #07070b; }
+.scrolly .pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.scrolly canvas { display: block; width: 100%; height: 100%; }
+.chap { position: absolute; inset-inline: 0; bottom: 0; padding: 72px max(16px, calc(50vw - 490px)) 40px; background: linear-gradient(to top, rgba(7,7,11,.92), rgba(7,7,11,.6) 60%, transparent); color: #ececf1; opacity: 0; transform: translateY(16px); transition: opacity .15s, transform .15s; pointer-events: none; }
+.chap.on { opacity: 1; transform: none; transition: opacity .4s .15s, transform .4s .15s; }
+.chap h2 { color: #ececf1; margin: 6px 0 8px; font-size: clamp(1.15rem, 4.2vw, 2rem); max-width: 22ch; }
+.chap p { color: #b4b4c3; max-width: 52ch; margin: 0; }
+.chap .tag { color: #9a9aab; }
+.chap.lion .tag { color: #c4cad4; } .chap.emir .tag { color: #e0b252; }
+.chap button { pointer-events: auto; margin-top: 14px; font: inherit; font-size: .9rem; font-weight: 600; background: rgba(255,255,255,.08); color: #ececf1; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; padding: 8px 16px; cursor: pointer; }
+.chap button:focus-visible { outline: 2px solid #e0b252; outline-offset: 2px; }
+.scrolly .fallback { display: none; }
+.scrolly.nogl { height: auto; } .scrolly.nogl .pin { position: relative; height: auto; }
+.scrolly.nogl canvas { display: none; }
+.scrolly.nogl .fallback { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 16px; }
+.scrolly.nogl .fallback img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; }
+.scrolly.nogl .chap { position: static; opacity: 1; transform: none; background: none; }
+#gl { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+.wrap { position: relative; z-index: 1; }
+.scrolly { background: transparent; }
+header.top, section.panel { background: color-mix(in srgb, var(--bg) 80%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid var(--line); border-radius: 14px; }
+header.top { margin-top: 24px; padding: 28px clamp(16px, 4vw, 40px); }
+section.panel { margin-top: 56px; padding: 32px clamp(16px, 4vw, 40px); }
+.sectitle { font-family: var(--display); font-weight: 800; font-size: clamp(1.8rem, 6vw, 3rem); line-height: 1.05; margin: 0 0 24px; color: var(--gold); }
+#p-song .sectitle { color: var(--silver); }
+.r { will-change: transform, opacity; transform-origin: 50% 100%; }
+section.panel { animation: none !important; }
+.stage { position: relative; height: clamp(380px, 68vh, 640px); margin-inline: -16px; background: radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--gold) 14%, transparent), transparent 60%), radial-gradient(ellipse at 20% 60%, color-mix(in srgb, var(--silver) 14%, transparent), transparent 55%), #07070b; overflow: hidden; touch-action: pan-y; }
+.stage canvas { display: block; width: 100%; height: 100%; }
+.stage .names { position: absolute; inset-inline: 0; bottom: 14px; display: flex; justify-content: space-around; pointer-events: none; font-family: var(--display); font-weight: 800; letter-spacing: .12em; font-size: clamp(.9rem, 3vw, 1.4rem); }
+.stage .names .l { color: #c4cad4; } .stage .names .e { color: #e0b252; }
+.stagebtns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; padding-block: 12px; }
+.stagebtns button { font: inherit; font-size: .9rem; font-weight: 600; background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; cursor: pointer; }
+.stagebtns button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.stage .fallback { display: none; }
+.stage.nogl .fallback { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 16px; height: 100%; }
+.stage.nogl canvas { display: none; }
+.stage .fallback img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 8px; margin-top: 12px; }
+.gallery figure { margin: 0; } .gallery img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; border: 1px solid var(--line); display: block; }
+.gallery figcaption { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 4px; }
+@media (prefers-reduced-motion: no-preference) { section.panel { animation: in .3s ease; } @keyframes in { from { opacity: .0; transform: translateY(6px); } } }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Unbounded:wght@300;800&display=swap">
+
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="wrap">
+<header class="top">
+  <p class="kicker">Dúo urbano · reggaetón 2012 × sexy drill</p>
+  <h1><span class="l">Lion</span> <span class="y">&amp;</span> <span class="e">Emir</span></h1>
+  <p class="sub">Plan de trabajo y presskit. Despecho, desamor, libertad y rumba, contados como historias.</p>
+</header>
+
+<section class="scrolly" id="scrolly" aria-label="Recorrido 3D por Lion y Emir">
+  <div class="pin" id="pin">
+    <div class="fallback" id="fallback"></div>
+    <div class="chap on" data-i="0"><span class="tag">Entra</span><h2>Despecho, desamor, libertad y rumba</h2><p>Baja para recorrer la escena.</p></div>
+    <div class="chap lion" data-i="1"><span class="tag">Lion · plata</span><h2>Voz sensual que salta a chanteo fuerte</h2><p>Ali Gatie, Murda Boy, Hades y Luar en el canto. Jay Wheeler, Dei V y Hades en el chanteo. Streetwear.</p><button type="button" id="nextLion">Cambiar foto</button></div>
+    <div class="chap emir" data-i="2"><span class="tag">Emir · oro</span><h2>Coros pensados para sonar épicos</h2><p>Chris Lebron, Joseph y Lucho RK en el canto. Maximalismo urbano.</p><button type="button" id="nextEmir">Cambiar foto</button></div>
+    <div class="chap" data-i="3"><span class="tag">Estructura · 60 compases</span><h2>Chill al entrar, agresivo en el precoro, épico en el coro</h2><p>Cada bloque mide los compases reales: un verso de 8 por artista y coros de 8.</p></div>
+    <div class="chap" data-i="4"><span class="tag">Plan</span><h2>12 semanas hasta el primer single</h2><p>Sigue bajando: plan de trabajo, receta de canción y presskit.</p></div>
+  </div>
+</section>
+
+
+<!-- PLAN -->
+<section class="panel" id="p-plan" aria-label="Plan de trabajo">
+  <h1 class="sectitle">Plan de trabajo</h1>
+  <h2>Resumen</h2>
+  <p>Lion y Emir son dos voces con funciones opuestas que se complementan: Lion lleva la parte sensual y el chanteo agresivo, Emir lleva los coros épicos. El plan los convierte en un repertorio, una marca visual y un lanzamiento en 12 semanas.</p>
+  <p class="note">Suposición: el plazo de 12 semanas y las tres canciones iniciales son una propuesta mía, porque no me diste fechas ni cantidad de temas. Se ajustan en cuanto lo confirmes.</p>
+
+  <div class="grid2">
+    <article class="card lion">
+      <span class="tag">Lion · plata</span>
+      <h3>Voz sensual y chanteo fuerte</h3>
+      <ul>
+        <li>Canto: Ali Gatie, Murda Boy, Hades, Luar</li>
+        <li>Chanteo: Jay Wheeler, Dei V, Hades</li>
+        <li>Ropa: streetwear</li>
+      </ul>
+    </article>
+    <article class="card emir">
+      <span class="tag">Emir · oro</span>
+      <h3>Coros épicos</h3>
+      <ul>
+        <li>Canto: Chris Lebron, Joseph, Lucho RK</li>
+        <li>Prioridad: coros de gran impacto</li>
+        <li>Ropa: maximalismo urbano</li>
+      </ul>
+    </article>
+  </div>
+
+  <h2>Fases</h2>
+
+  <div class="phase">
+    <div class="when"><b>Fase 0</b>Semana 1</div>
+    <div>
+      <h3>Definición</h3>
+      <ul>
+        <li>Fijar el nombre del dúo (o confirmar que es "Lion y Emir"), ciudad, idioma y público.</li>
+        <li>Acordar BPM y tonalidades de trabajo (propuesta: 90 a 98 BPM para el dembow 2012, 138 a 144 para el pulso drill).</li>
+        <li>Reunir las referencias en una carpeta con canciones por artista y una nota de qué se toma de cada una.</li>
+        <li>Revisar los dos perfiles de Instagram (warrick_28 y jlions_180) y confirmar de quién es cada uno.</li>
+      </ul>
+      <p class="done"><strong>Listo cuando:</strong> existe un documento de una página con nombre, BPM, tonos, idioma y público.</p>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="when"><b>Fase 1</b>Semanas 2 a 3</div>
+    <div>
+      <h3>Sonido y plantilla</h3>
+      <ul>
+        <li>Plantilla de proyecto en Ableton o FL Studio con la estructura de beat: intro 4 (opcional), inicio 4, precoro 4, coro 8, versos de 8 por artista.</li>
+        <li>Paleta de sonidos: dembow clásico 2012, 808 y hi-hats de drill, sintes oscuros, pads y texturas.</li>
+        <li>Cadena vocal base para cada voz (Lion: cálida y cercana; Emir: ancha y potente para coros).</li>
+        <li>Banco de samples y sonidos propios, sin herramientas de pago.</li>
+      </ul>
+      <p class="done"><strong>Listo cuando:</strong> un beat de prueba de 32 compases suena con la paleta final y las dos cadenas vocales.</p>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="when"><b>Fase 2</b>Semanas 3 a 7</div>
+    <div>
+      <h3>Escritura y producción de 3 canciones</h3>
+      <ul>
+        <li>Una historia por canción con planteamiento, nudo, desarrollo y desenlace (ver la pestaña Receta de canción).</li>
+        <li>Temas sugeridos, uno por eje: despecho, libertad y rumba. El desamor atraviesa los tres.</li>
+        <li>Maqueta de beat, topline de coro con Emir, versos con Lion, versión demo.</li>
+        <li>Grabación, edición vocal, mezcla y master de cada tema.</li>
+      </ul>
+      <p class="done"><strong>Listo cuando:</strong> 3 canciones masterizadas, con letra final y archivo de estructura.</p>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="when"><b>Fase 3</b>Semanas 5 a 9</div>
+    <div>
+      <h3>Marca y contenido</h3>
+      <ul>
+        <li>Identidad visual: negro profundo, plata para Lion, oro para Emir, un color común a definir.</li>
+        <li>Sesión de fotos con los dos looks (streetwear y maximalismo urbano).</li>
+        <li>Cortes verticales de 15 a 30 segundos de cada coro para redes.</li>
+        <li>Presskit completo (borrador en la pestaña Presskit).</li>
+      </ul>
+      <p class="done"><strong>Listo cuando:</strong> fotos, logo, banner y 9 cortes verticales listos para usar.</p>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="when"><b>Fase 4</b>Semanas 9 a 12</div>
+    <div>
+      <h3>Lanzamiento</h3>
+      <ul>
+        <li>Calendario de publicación: un single cada 2 semanas, con teaser previo.</li>
+        <li>Distribución a plataformas de streaming y perfiles listos.</li>
+        <li>Revisar resultados tras cada single y ajustar el siguiente.</li>
+      </ul>
+      <p class="done"><strong>Listo cuando:</strong> el primer single está publicado y el segundo tiene fecha.</p>
+    </div>
+  </div>
+
+  <h2>Preguntas abiertas</h2>
+  <div class="card">
+    <ul>
+      <li>Nombre artístico del dúo, ciudad de origen e idioma de las letras.</li>
+      <li>¿Quién produce los beats y quién mezcla? ¿Cuánto se graba en casa?</li>
+      <li>Cuántas canciones hay ya escritas o grabadas, si las hay.</li>
+      <li>Cuenta de Instagram oficial del dúo y de cada uno.</li>
+      <li>Referencia "Joseph" (Emir): nombre completo del artista.</li>
+      <li>Presupuesto y plazo real de lanzamiento.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- RECETA -->
+<section class="panel" id="p-song" aria-label="Receta de canción">
+  <h1 class="sectitle">Receta de canción</h1>
+  <h2>Estructura del beat</h2>
+  <p>Mapa de compases con la estructura que indicaste, extendido a una canción completa con un verso por artista.</p>
+  <div class="bars" role="img" aria-label="Intro 4, inicio 4, precoro 4, coro 8, verso Lion 8, precoro 4, coro 8, verso Emir 8, precoro 4, coro final 8">
+    <div class="bar n" style="flex: 4"><b>Intro</b>4</div>
+    <div class="bar n" style="flex: 4"><b>Inicio</b>4</div>
+    <div class="bar n" style="flex: 4"><b>Precoro</b>4</div>
+    <div class="bar g" style="flex: 8"><b>Coro</b>8</div>
+    <div class="bar s" style="flex: 8"><b>Verso Lion</b>8</div>
+    <div class="bar n" style="flex: 4"><b>Precoro</b>4</div>
+    <div class="bar g" style="flex: 8"><b>Coro</b>8</div>
+    <div class="bar g" style="flex: 8"><b>Verso Emir</b>8</div>
+    <div class="bar n" style="flex: 4"><b>Precoro</b>4</div>
+    <div class="bar g" style="flex: 8"><b>Coro final</b>8</div>
+  </div>
+  <p class="note">Intro y inicio suman 8 compases sin voz fuerte; la intro puede omitirse. El orden de verso y coro tras el primer coro es mi propuesta; tú indicaste solo los largos.</p>
+
+  <h2>Historia en cuatro partes</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Parte</th><th>Dónde cae</th><th>Qué hace</th><th>Cómo suena</th></tr></thead>
+    <tbody>
+      <tr><td>Planteamiento</td><td>Intro, inicio y verso de Lion</td><td>Presenta a los personajes, el lugar y la situación.</td><td>Chill, voz sensual, sintes suaves.</td></tr>
+      <tr><td>Nudo</td><td>Precoros</td><td>Estalla el conflicto: traición, celos, despecho.</td><td>Agresivo, percusión de drill, chanteo.</td></tr>
+      <tr><td>Desarrollo</td><td>Verso de Emir y segundo coro</td><td>La reacción: rumba, venganza, intentos de olvidar.</td><td>Dembow lleno, coro épico creciendo.</td></tr>
+      <tr><td>Desenlace</td><td>Coro final</td><td>Cierre: libertad, aceptación o decisión final.</td><td>Máxima épica, capas de voces de Emir.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Reparto de voces</h2>
+  <div class="grid2">
+    <article class="card lion"><span class="tag">Lion</span><ul>
+      <li>Intro e inicio en tono sensual.</li>
+      <li>Precoros con el salto a chanteo fuerte.</li>
+      <li>Un verso de 8 compases por canción.</li>
+    </ul></article>
+    <article class="card emir"><span class="tag">Emir</span><ul>
+      <li>Los coros son la prioridad: melodía grande, fácil de cantar.</li>
+      <li>Armonías y dobles para la épica.</li>
+      <li>Un verso de 8 compases por canción.</li>
+    </ul></article>
+  </div>
+
+  <h2>Tres temas para empezar</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Eje</th><th>Idea de historia</th><th>Título provisional</th></tr></thead>
+    <tbody>
+      <tr><td>Despecho</td><td>Él descubre algo y se va de la fiesta sin despedirse.</td><td><span class="todo">por definir</span></td></tr>
+      <tr><td>Libertad</td><td>Después de la ruptura, la primera noche sin dar explicaciones.</td><td><span class="todo">por definir</span></td></tr>
+      <tr><td>Rumba</td><td>La noche en que todo se desborda y nadie quiere volver.</td><td><span class="todo">por definir</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Las ideas de historia son ejemplos para arrancar, no letras. Se reemplazan por las que escriban Lion y Emir.</p>
+</section>
+
+<!-- PRESSKIT -->
+<section class="panel" id="p-kit" aria-label="Presskit">
+  <h1 class="sectitle">Presskit</h1>
+  <p class="note">Borrador. Los campos marcados <span class="todo">por completar</span> no los inventé: faltan datos reales de Lion y Emir.</p>
+
+  <h2>Quiénes son</h2>
+  <p>Lion y Emir es un dúo de música urbana que mezcla el reggaetón de 2012 con el sexy drill, sobre texturas electrónicas oscuras. Cada canción cuenta una historia de despecho, desamor, libertad o rumba, con planteamiento, nudo, desarrollo y desenlace.</p>
+  <p>Lion pone la voz sensual y el chanteo agresivo. Emir pone los coros, pensados para sonar épicos.</p>
+
+  <div class="grid2">
+    <article class="card lion">
+      <span class="tag">Lion</span>
+      <dl>
+        <dt>Rol</dt><dd>Voz principal en versos y precoros</dd>
+        <dt>Estilo</dt><dd>Sensual, con cambios a chanteo fuerte</dd>
+        <dt>Look</dt><dd>Streetwear, plata</dd>
+        <dt>Nombre</dt><dd>Leonardo Penso</dd>
+        <dt>Origen (según su bio)</dt><dd>Venezuela y EE. UU.</dd>
+        <dt>Bio de Instagram</dt><dd>"Urban &amp; Trap Artist. Creating my own lane."</dd>
+        <dt>Edad, biografía corta</dt><dd><span class="todo">por completar</span></dd>
+      </dl>
+    </article>
+    <article class="card emir">
+      <span class="tag">Emir</span>
+      <dl>
+        <dt>Rol</dt><dd>Coros y voz de impacto</dd>
+        <dt>Estilo</dt><dd>Melódico, épico</dd>
+        <dt>Look</dt><dd>Maximalismo urbano, oro</dd>
+        <dt>Nombre</dt><dd>Emir Warrick</dd>
+        <dt>Origen (según su bio)</dt><dd>Venezuela y EE. UU.</dd>
+        <dt>Bio de Instagram</dt><dd>"Urban Reggaeton Artist. Persiguiendo mis sueños, sin rendirme."</dd>
+        <dt>Edad, biografía corta</dt><dd><span class="todo">por completar</span></dd>
+      </dl>
+    </article>
+  </div>
+
+  <h2>Sonido</h2>
+  <div class="themes" aria-label="Temas">
+    <span class="chip">Despecho</span><span class="chip">Desamor</span><span class="chip">Libertad</span><span class="chip">Rumba</span>
+  </div>
+  <dl>
+    <dt>Género</dt><dd>Reggaetón 2012 y sexy drill, con sonidos electrónicos y texturas oscuras</dd>
+    <dt>Referencias artísticas</dt><dd>Farruko, Anuel AA, Daddy Yankee, Roa, Hades</dd>
+    <dt>Referencias de chanteo</dt><dd>Jay Wheeler, Dei V, Hades</dd>
+    <dt>Estructura</dt><dd>Intro chill, precoros agresivos, coros épicos de Emir</dd>
+  </dl>
+
+  <h2>Identidad visual</h2>
+  <div class="swatches">
+    <div class="sw"><i style="background:#c4cad4"></i><span>Plata · Lion</span></div>
+    <div class="sw"><i style="background:#e0b252"></i><span>Oro · Emir</span></div>
+    <div class="sw"><i style="background:#0b0b10"></i><span>Negro base</span></div>
+    <div class="sw"><i style="background:#14141c"></i><span>Superficie</span></div>
+  </div>
+  <p class="note">Los tonos exactos son propuesta mía. Plata para Lion, oro para Emir; el negro une las dos marcas.</p>
+
+  <h2>Fotos</h2>
+  <p>Capturas de sus perfiles de Instagram, de calidad media. Sirven de referencia hasta tener la sesión propia.</p>
+  <div class="gallery" id="gallery"></div>
+
+  <h2>Música y material</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Elemento</th><th>Estado</th></tr></thead>
+    <tbody>
+      <tr><td>Canciones publicadas</td><td><span class="todo">por completar</span></td></tr>
+      <tr><td>Enlaces de streaming</td><td><span class="todo">por completar</span></td></tr>
+      <tr><td>Fotos de prensa (look Lion, look Emir, dúo)</td><td>Pendiente de sesión</td></tr>
+      <tr><td>Logo y banner</td><td>Pendiente de diseño</td></tr>
+      <tr><td>Vídeos</td><td>Pendiente</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Contacto</h2>
+  <dl>
+    <dt>Instagram</dt><dd><a href="https://www.instagram.com/jlions_180/" target="_blank" rel="noopener">jlions_180</a> · <a href="https://www.instagram.com/warrick_28/" target="_blank" rel="noopener">warrick_28</a> (Lion: jlions_180 · Emir: warrick_28)</dd>
+    <dt>Correo de contratación</dt><dd><span class="todo">por completar</span></dd>
+    <dt>Teléfono / representante</dt><dd><span class="todo">por completar</span></dd>
+  </dl>
+</section>
+</div>
+
+<script src="photos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="scene.js"></script>
+
+
+</body>
+</html>
